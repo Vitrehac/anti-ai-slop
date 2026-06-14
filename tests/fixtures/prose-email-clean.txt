@@ -1,0 +1,4 @@
+Quick ask: can we move standup notes into the #eng-updates channel by Monday? Right now status lives in three threads and I missed the deploy window twice this month.
+
+Thanks,
+Vít

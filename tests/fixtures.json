@@ -1,0 +1,51 @@
+[
+  {
+    "id": "linktwerk-dev-post",
+    "file": "linktwerk-dev.txt",
+    "maxScore": 1,
+    "minBlockers": 4,
+    "description": "Linktwerk output must score heavy slop"
+  },
+  {
+    "id": "linktwerk-fired-boss",
+    "file": "linktwerk-fired-boss.txt",
+    "maxScore": 1,
+    "minBlockers": 3,
+    "description": "Thought-leadership post with fake stat + engagement bait"
+  },
+  {
+    "id": "deslopped-dev-clean",
+    "file": "deslopped-dev-clean.txt",
+    "minScore": 3,
+    "maxBlockers": 0,
+    "description": "Human job-hunt post should pass"
+  },
+  {
+    "id": "fake-humanized-job",
+    "file": "fake-humanized-job.txt",
+    "maxScore": 2,
+    "minWarnings": 2,
+    "description": "Fake-humanized shape should not score 4"
+  },
+  {
+    "id": "czech-email-slop",
+    "file": "czech-email-slop.txt",
+    "maxScore": 2,
+    "expectIds": ["czech-email-slop"],
+    "description": "Czech template email flagged"
+  },
+  {
+    "id": "czech-email-clean",
+    "file": "czech-email-clean.txt",
+    "minScore": 3,
+    "maxBlockers": 0,
+    "description": "De-slopped Czech email passes"
+  },
+  {
+    "id": "prose-email-clean",
+    "file": "prose-email-clean.txt",
+    "minScore": 3,
+    "maxBlockers": 0,
+    "description": "Plain English email passes"
+  }
+]
