@@ -12,8 +12,8 @@ Pre-ship check on the agent's own draft before sending to the user. Blockers onl
 1. Take the draft about to be sent (not the user's source material).
 2. Pipe to gate script:
    ```bash
-   node .agents/skills/anti-ai-slop/scripts/gate.mjs --json --strict draft.txt
-   # or: echo "<draft>" | node .agents/skills/anti-ai-slop/scripts/gate.mjs --stdin --strict --json
+   node scripts/gate.mjs --json --strict draft.txt
+   # or: echo "<draft>" | node scripts/gate.mjs --stdin --strict --json
    ```
 3. If fail → rewrite draft silently, re-run gate, then send. See [loop.md](loop.md) for max 3 iterations.
 

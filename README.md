@@ -1,6 +1,8 @@
 # Anti AI Slop
 
-A [Cursor Agent Skill](https://cursor.com/docs/agent/skills) that **detects and removes AI writing tells** — em dashes, fake stats, lesson lists, LinkedIn engagement bait, Czech template emails, and the "humanized" shape that still smells like ChatGPT.
+[![CI](https://github.com/Vitrehac/anti-ai-slop/actions/workflows/ci.yml/badge.svg)](https://github.com/Vitrehac/anti-ai-slop/actions/workflows/ci.yml)
+
+A **Cursor + Claude Code** agent skill that **detects and removes AI writing tells** — em dashes, fake stats, lesson lists, LinkedIn engagement bait, Czech template emails, and the "humanized" shape that still smells like ChatGPT.
 
 > Scan it. Gate it. De-slop it. Ship text that sounds like a person wrote it.
 
@@ -67,9 +69,25 @@ Restart Cursor or start a new agent chat after installing.
 
 ### Claude Code
 
+**Recommended** (adapter + cache):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Vitrehac/anti-ai-slop/master/claude/install.sh | bash
+```
+
+Windows:
+
+```powershell
+irm https://raw.githubusercontent.com/Vitrehac/anti-ai-slop/master/claude/install.ps1 | iex
+```
+
+**Quick:**
+
 ```bash
 git clone https://github.com/Vitrehac/anti-ai-slop.git ~/.claude/skills/anti-ai-slop
 ```
+
+See [claude/README.md](claude/README.md).
 
 ---
 
@@ -167,7 +185,11 @@ anti-ai-slop/
 │   └── extract-ui-copy.mjs
 └── tests/
     ├── fixtures.json
-    └── fixtures/            # 7 test cases
+    ├── fixtures/            # slop + clean inputs
+    └── fixtures/golden/     # reference de-slop outputs (gate must pass)
+└── claude/                  # Claude sidecar (optional for Cursor)
+    ├── install.sh
+    └── install.ps1
 ```
 
 ---
@@ -175,9 +197,13 @@ anti-ai-slop/
 ## CI
 
 ```bash
-node scripts/check-fixtures.mjs
-node scripts/scan.mjs --json --strict docs/**/*.md
+node scripts/check-fixtures.mjs   # 11 cases incl. golden gate outputs
+node scripts/scan.mjs --json --strict draft.txt
 ```
+
+Golden reference outputs: [tests/fixtures/golden/](tests/fixtures/golden/) — each must pass `gate.mjs --strict`.
+
+GitHub Actions runs on every push.
 
 ---
 

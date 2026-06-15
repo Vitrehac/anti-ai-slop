@@ -7,7 +7,7 @@ Scan plus rhetorical review. Produces slop score and actionable findings.
 1. Load the matching register from `registry/registers/`.
 2. **Run scan first** when a file path exists:
    ```bash
-   node .agents/skills/anti-ai-slop/scripts/scan.mjs --json <target>
+   node scripts/scan.mjs --json <target>
    ```
 3. Read the full target (file or pasted text).
 4. Apply script findings as blockers/warnings.
