@@ -9,9 +9,9 @@ Fast deterministic lint. Script-backed; no LLM required.
    - **Pasted text:** pipe to stdin or pass as quoted argument
 2. Run:
    ```bash
-   node .agents/skills/anti-ai-slop/scripts/scan.mjs --json <file>
-   node .agents/skills/anti-ai-slop/scripts/scan.mjs --stdin --json   # piped text
-   node .agents/skills/anti-ai-slop/scripts/scan.mjs --json --strict README.md  # CI: exit 1 if score < 3
+   node scripts/scan.mjs --json <file>
+   node scripts/scan.mjs --stdin --json   # piped text
+   node scripts/scan.mjs --json --strict README.md  # exit 1 if score < 3
    ```
 3. If `--json` omitted, output human-readable `file:line` format.
 4. Report score and findings. Do not rewrite unless user asked for `de-slop` or `humanize`.

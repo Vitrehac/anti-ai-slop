@@ -18,6 +18,7 @@
     "file": "deslopped-dev-clean.txt",
     "minScore": 3,
     "maxBlockers": 0,
+    "mustPassGateStrict": true,
     "description": "Human job-hunt post should pass"
   },
   {
@@ -39,6 +40,7 @@
     "file": "czech-email-clean.txt",
     "minScore": 3,
     "maxBlockers": 0,
+    "mustPassGateStrict": true,
     "description": "De-slopped Czech email passes"
   },
   {
@@ -46,6 +48,39 @@
     "file": "prose-email-clean.txt",
     "minScore": 3,
     "maxBlockers": 0,
+    "mustPassGateStrict": true,
     "description": "Plain English email passes"
+  },
+  {
+    "id": "golden-job-hunt",
+    "file": "golden/job-hunt.txt",
+    "minScore": 3,
+    "maxBlockers": 0,
+    "mustPassGateStrict": true,
+    "description": "Reference de-slop output for job hunt"
+  },
+  {
+    "id": "golden-social-dev",
+    "file": "golden/social-dev.txt",
+    "minScore": 3,
+    "maxBlockers": 0,
+    "mustPassGateStrict": true,
+    "description": "Reference de-slop output for dev job post"
+  },
+  {
+    "id": "golden-czech-outreach",
+    "file": "golden/czech-outreach.txt",
+    "minScore": 3,
+    "maxBlockers": 0,
+    "mustPassGateStrict": true,
+    "description": "Reference de-slop output for Czech email"
+  },
+  {
+    "id": "golden-prose-email",
+    "file": "golden/prose-email.txt",
+    "minScore": 3,
+    "maxBlockers": 0,
+    "mustPassGateStrict": true,
+    "description": "Reference clean prose email"
   }
 ]

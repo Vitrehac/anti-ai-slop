@@ -26,11 +26,11 @@ Automated **agent** loop. Scripts gate; LLM rewrites. Max **3 iterations**.
 
 1. **Scan** draft:
    ```bash
-   node .agents/skills/anti-ai-slop/scripts/scan.mjs --json <file>
+   node scripts/scan.mjs --json <file>
    ```
 2. **Gate** (blockers = hard fail):
    ```bash
-   node .agents/skills/anti-ai-slop/scripts/gate.mjs --json --strict <file>
+   node scripts/gate.mjs --json --strict <file>
    ```
 3. If fail → apply [de-slop.md](de-slop.md) + register + [voice-dial.md](voice-dial.md). Fix every blocker first.
 4. Re-run gate. Repeat until pass or **3 iterations**.

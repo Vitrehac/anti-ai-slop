@@ -7,8 +7,8 @@ Visual slop → `$impeccable`. **Copy slop** → this skill on extracted text.
 1. Confirm target is UI file (`.tsx`, `.jsx`, `.html`, `.vue`, `.svelte`).
 2. Extract copy:
    ```bash
-   node .agents/skills/anti-ai-slop/scripts/extract-ui-copy.mjs src/components/Hero.tsx > /tmp/copy.txt
-   node .agents/skills/anti-ai-slop/scripts/scan.mjs --json /tmp/copy.txt
+   node scripts/extract-ui-copy.mjs src/components/Hero.tsx > /tmp/copy.txt
+   node scripts/scan.mjs --json /tmp/copy.txt
    ```
 3. Fix copy in source file (headlines, placeholders, aria-labels, button text).
 4. Do not refactor layout here — route gradients/card grids to impeccable.

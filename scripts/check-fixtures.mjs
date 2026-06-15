@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Run fixture suite — exits 1 if any case fails.
- * node .agents/skills/anti-ai-slop/scripts/check-fixtures.mjs
+ * node scripts/check-fixtures.mjs
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -12,6 +12,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'tests', 'fixtures.json'), 'utf8'));
 const fixturesDir = path.join(root, 'tests', 'fixtures');
+
+function passesStrictGate(score, blockers) {
+  return blockers === 0 && score >= 3;
+}
 
 let failed = 0;
 
@@ -46,13 +50,17 @@ for (const spec of manifest) {
       if (!ids.includes(id)) errors.push(`missing expected finding id: ${id}`);
     }
   }
+  if (spec.mustPassGateStrict && !passesStrictGate(score, blockers)) {
+    errors.push(`failed strict gate (score=${score}, blockers=${blockers})`);
+  }
 
   if (errors.length) {
     failed++;
     process.stderr.write(`FAIL ${spec.id}: ${errors.join('; ')}\n`);
     process.stderr.write(`  score=${score} blockers=${blockers} warnings=${warnings} ids=${ids.join(',')}\n`);
   } else {
-    process.stdout.write(`ok ${spec.id} (score=${score})\n`);
+    const gate = spec.mustPassGateStrict ? ' gate=PASS' : '';
+    process.stdout.write(`ok ${spec.id} (score=${score}${gate})\n`);
   }
 }
 

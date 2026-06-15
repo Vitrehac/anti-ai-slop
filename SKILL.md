@@ -36,6 +36,14 @@ Full lists: [registry/phrases.md](registry/phrases.md), [registry/structural.md]
 
 ## Setup
 
+**Skill root** = directory containing this `SKILL.md`. Run all scripts from there:
+
+```bash
+node scripts/scan.mjs --json <target>
+node scripts/gate.mjs --strict <target>
+node scripts/check-fixtures.mjs
+```
+
 Before any command:
 
 1. If the user invoked a sub-command, read `reference/<command>.md`. Non-optional.
@@ -47,11 +55,11 @@ Before any command:
    - Email, essay, narrative (other) → [registry/registers/prose.md](registry/registers/prose.md)
    - README, API docs, runbooks → [registry/registers/docs.md](registry/registers/docs.md)
    - Taglines, hero copy, landing text → [registry/registers/marketing.md](registry/registers/marketing.md)
-3. When a file path exists, **run `scan` before `audit`, `de-slop`, or `humanize`**:
+5. When a file path exists, **run `scan` before `audit`, `de-slop`, or `humanize`**:
    ```bash
-   node .agents/skills/anti-ai-slop/scripts/scan.mjs --json <target>
+   node scripts/scan.mjs --json <target>
    ```
-4. **Scan score is a floor, not a pass.** Score 4 with LinkedIn/job-hunt/Czech email shape still requires LLM shape audit (fake humanized, lesson lists, fake stats). See [reference/audit.md](reference/audit.md).
+6. **Scan score is a floor, not a pass.** Score 4 with LinkedIn/job-hunt/Czech email shape still requires LLM shape audit. See [reference/audit.md](reference/audit.md).
 
 ## Commands
 
@@ -103,7 +111,7 @@ Before sending rewritten text to the user:
 4. If target was social/email: one concrete detail survives; no invented org names or survey percentages unless user provided them.
 5. If scan score ≥ 3 but shape still feels AI → [loop.md](reference/loop.md) (max 3 iterations):
    ```bash
-   node .agents/skills/anti-ai-slop/scripts/gate.mjs --json --strict draft.txt
+   node scripts/gate.mjs --json --strict draft.txt
    ```
 
 ## Sibling skills
@@ -125,11 +133,10 @@ Before sending rewritten text to the user:
 ## CI / regression tests
 
 ```bash
-# Fixture suite (must pass before skill changes ship)
-node .agents/skills/anti-ai-slop/scripts/check-fixtures.mjs
-
-# Single file strict lint
-node .agents/skills/anti-ai-slop/scripts/scan.mjs --json --strict docs/**/*.md
+node scripts/check-fixtures.mjs
+node scripts/scan.mjs --json --strict path/to/file.md
 ```
 
-Fixtures live in [tests/fixtures.json](tests/fixtures.json). Add a case when you fix a regression.
+GitHub Actions runs `check-fixtures.mjs` on every push. Golden outputs live in [tests/fixtures/golden/](tests/fixtures/golden/) and must pass strict gate.
+
+Fixtures manifest: [tests/fixtures.json](tests/fixtures.json).
